@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2025 at 11:25 AM
+-- Generation Time: Jan 07, 2026 at 10:38 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,6 +38,13 @@ CREATE TABLE `parking_records` (
   `recorded_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `parking_records`
+--
+
+INSERT INTO `parking_records` (`record_id`, `id`, `entry_time`, `exit_time`, `total_hours`, `total_amount`, `created_at`, `recorded_id`) VALUES
+(1, 1, '2026-01-07 10:02:27', '2026-01-07 10:05:24', 1, 1500, '2026-01-07 09:02:27', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -57,7 +64,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `full_name`, `phone`, `role`, `created_at`) VALUES
-(1, 'mihigo', 'mihigojordan@gmail.c', 'Driver', '2025-12-17 08:45:11'),
+(1, 'mihigo', '0791813298', 'Driver', '2025-12-17 08:45:11'),
 (2, 'mihigo prince', 'mihigojordan8@gmail.', 'ParkingManager', '2025-12-17 08:45:47'),
 (3, 'kalimu', '0791813289', 'ParkingManager', '2025-12-17 08:53:23');
 
@@ -80,8 +87,10 @@ CREATE TABLE `vehicles` (
 --
 
 INSERT INTO `vehicles` (`id`, `plate_number`, `vehicle_type`, `user_id`, `created_at`) VALUES
-(1, 'RAB123C', 'Car', 2, '2025-12-17 09:11:07'),
-(2, 'RB12C', '', 2, '2025-12-17 09:20:39');
+(1, 'RAB123C', 'Car', 1, '2025-12-17 09:11:07'),
+(2, 'RB12C', '', 1, '2025-12-17 09:20:39'),
+(3, 'RAB 123 A', 'Car', 1, '2026-01-07 08:59:34'),
+(4, 'RAB 123 B', 'Car', 1, '2026-01-07 09:00:07');
 
 --
 -- Indexes for dumped tables
@@ -118,7 +127,7 @@ ALTER TABLE `vehicles`
 -- AUTO_INCREMENT for table `parking_records`
 --
 ALTER TABLE `parking_records`
-  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -130,7 +139,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vehicles`
 --
 ALTER TABLE `vehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
