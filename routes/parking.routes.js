@@ -1,26 +1,77 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const {
-    recordEntry,
-    recordExit,
-    viewActiveParking,
-    viewVehicleHistory,
-    viewUserHistory,
-    dailyReport,
-    monthlyReport
-} = require('../controller/parking.controller');
+  recordEntry,
+  recordExit,
+  viewActiveParking,
+  viewVehicleHistory,
+  viewUserHistory,
+  dailyReport,
+  monthlyReport,
+} = require("../controller/parking.controller");
 
-const { verifyToken, authorizeRoles } = require('../middlewares/auth.middleware');
+const {
+  verifyToken,
+  authorizeRoles,
+} = require("../middlewares/auth.middleware");
 
+// ---------------------------
 // ParkingManager routes
-router.post('/entry', verifyToken, authorizeRoles('ParkingManager'), recordEntry);
-router.post('/exit', verifyToken, authorizeRoles('ParkingManager'), recordExit);
-router.get('/active', verifyToken, authorizeRoles('ParkingManager'), viewActiveParking);
-router.get('/vehicle/:id', verifyToken, authorizeRoles('ParkingManager'), viewVehicleHistory);
-router.get('/report/daily', verifyToken, authorizeRoles('ParkingManager'), dailyReport);
-router.get('/report/monthly', verifyToken, authorizeRoles('ParkingManager'), monthlyReport);
+// ---------------------------
 
+// Record vehicle entry (only manager)
+router.post(
+  "/entry",
+  verifyToken,
+  authorizeRoles("ParkingManager"),
+  recordEntry
+);
+
+// Record vehicle exit (only manager)
+router.post("/exit", verifyToken, authorizeRoles("ParkingManager"), recordExit);
+
+// View all active parking (only manager)
+router.get(
+  "/active",
+  verifyToken,
+  authorizeRoles("ParkingManager"),
+  viewActiveParking
+);
+
+// View history of a specific vehicle (only manager)
+router.get(
+  "/vehicle/:id",
+  verifyToken,
+  authorizeRoles("ParkingManager"),
+  viewVehicleHistory
+);
+
+// Daily report (only manager)
+router.get(
+  "/report/daily",
+  verifyToken,
+  authorizeRoles("ParkingManager"),
+  dailyReport
+);
+
+// Monthly report (only manager)
+router.get(
+  "/report/monthly",
+  verifyToken,
+  authorizeRoles("ParkingManager"),
+  monthlyReport
+);
+
+// ---------------------------
 // Normal user routes
-router.get('/user/history', verifyToken, authorizeRoles('Driver', 'ParkingManager'), viewUserHistory);
+// ---------------------------
+
+// View history of their assigned vehicles (Drivers can see only their vehicles, Manager sees all)
+router.get(
+  "/user/history",
+  verifyToken,
+  authorizeRoles("Driver", "ParkingManager"),
+  viewUserHistory
+);
 
 module.exports = router;
